@@ -1,0 +1,25 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+body input {
+  padding: 10px;
+  outline: none;
+  border-radius: 10px;
+  width: 50%;
+  border: 1px solid black;
+}
+
+body input.fail {
+  border-color: red;
+}
+body input.success {
+  border-color: green;
+}
+body input.loading {
+  border-radius: blue;
+}
