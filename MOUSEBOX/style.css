@@ -1,5 +1,6 @@
 body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100vw;
@@ -17,9 +18,25 @@ body input {
 body input.fail {
   border-color: red;
 }
+
 body input.success {
   border-color: green;
 }
 body input.loading {
-  border-radius: blue;
+  border-color: blue;
+}
+
+body > div {
+  margin-top: 10px;
+  padding: 10px;
+}
+
+body i {
+  animation: rotate 3s linear;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
 }
