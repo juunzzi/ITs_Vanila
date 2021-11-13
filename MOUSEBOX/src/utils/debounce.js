@@ -1,10 +1,11 @@
-export function debounce(callback, delay) {
+export function debounce(callback, delay, setLoading) {
   let timer;
 
   return (event) => {
+    setLoading(event);
     if (timer) {
       clearTimeout(timer);
     }
-    setTimeout(callback, delay, event);
+    timer = setTimeout(callback, delay, event);
   };
 }
