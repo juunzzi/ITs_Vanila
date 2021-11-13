@@ -4,14 +4,13 @@ class Input {
   constructor({ $app, state, onChange }) {
     this.$app = $app;
     this.$target = document.createElement("input");
-    this.$target.addEventListener("input", debounce(onChange, 1000));
+    this.$target.addEventListener("input", onChange);
     this.state = state;
     this.$app.appendChild(this.$target);
     this.render();
   }
   setState(newState) {
     this.state = newState;
-    console.log(this.state);
     this.render();
   }
   render() {
