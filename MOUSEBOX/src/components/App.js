@@ -1,5 +1,7 @@
 import data from "../dummy/data.js";
+import { debounce } from "../utils/debounce.js";
 import Input from "./Input.js";
+import Toast from "./Toast.js";
 
 class App {
   constructor({ $app }) {
@@ -18,6 +20,10 @@ class App {
       isDuplicate: this.state.isDuplicate,
       loading: this.state.loading,
     });
+    this.toast.setState({
+      isDuplicate: this.state.isDuplicate,
+      loading: this.state.loading,
+    });
   }
   render() {
     this.input = new Input({
@@ -27,18 +33,37 @@ class App {
         isDuplicate: this.state.isDuplicate,
         loading: this.state.loading,
       },
-      onChange: (e) => {
-        let isDuplicate = false;
+      onChange: debounce(
+        (e) => {
+          let isDuplicate = false;
 
-        if (data.includes(e.target.value)) {
-          isDuplicate = true;
+          if (data.includes(e.target.value)) {
+            isDuplicate = true;
+          }
+
+          this.setState({
+            ...this.state,
+            nickname: e.target.value,
+            isDuplicate,
+            loading: false,
+          });
+        },
+        1000,
+        (e) => {
+          this.setState({
+            ...this.state,
+            nickname: e.target.value,
+            loading: true,
+          });
         }
+      ),
+    });
 
-        this.setState({
-          ...this.state,
-          isDuplicate,
-          loading: false,
-        });
+    this.toast = new Toast({
+      $app: this.$app,
+      state: {
+        isDuplicate: this.state.isDuplicate,
+        loading: this.state.loading,
       },
     });
   }
